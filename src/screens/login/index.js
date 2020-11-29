@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import Header from "../../common/header";
 import {
   Card,
   CardContent,
@@ -8,18 +8,13 @@ import {
   InputLabel,
   Button
 } from "@material-ui/core";
-import "./login.css";
-import AppContext from "../../common/app-context";
+import "./index.css";
 
 const USER_DETAILS = {
   userName: "user",
-  password: "user",
-  access_token:
-    "IGQVJVWF9zMXpfLTlmZAzAtR2lCWFVhOUM5SXRNelptclZABWjFGYXFucGZAtVlZAwbFZAvY3c2YXNRTzcxaTY3YUR2YmlvVklkNjk0dnRHUjV4OVZAiZA2RELTJxeEN4WC1sX0tWVzZAZAZA2tOVDZAuc2Nlb3p3RAZDZD"
+  password: "user"
 };
 const Login = () => {
-  const { setIsLoggedIn } = useContext(AppContext);
-  const history = useHistory();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({
@@ -33,7 +28,7 @@ const Login = () => {
       setError({
         ...error,
         userName: !username,
-        password: !password
+        password:!password
       });
     } else if (
       username === USER_DETAILS.userName &&
@@ -43,9 +38,6 @@ const Login = () => {
         ...error,
         login: false
       });
-      sessionStorage.setItem("access_token", USER_DETAILS.access_token);
-      history.push("/home");
-      setIsLoggedIn(true)
     } else {
       setError({
         ...error,
@@ -56,6 +48,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <Header />
       <div className="login-form-conatiner">
         <Card>
           <CardContent>
@@ -69,15 +62,17 @@ const Login = () => {
                   value={username}
                   onChange={event => {
                     setError({
-                      ...error,
-                      login: false,
-                      userName: false
-                    });
+                        ...error,
+                        login: false,
+                        userName:false
+                      });
                     setUserName(event.target.value);
                   }}
                 />
                 {error.userName && (
-                  <span className="error-message">required</span>
+                  <span className="error-message">
+                   required
+                  </span>
                 )}
               </FormControl>
               <FormControl>
@@ -89,15 +84,17 @@ const Login = () => {
                   aria-describedby="my-helper-text"
                   onChange={event => {
                     setError({
-                      ...error,
-                      login: false,
-                      password: false
-                    });
+                        ...error,
+                        login: false,
+                        password:false
+                      });
                     setPassword(event.target.value);
                   }}
                 />
                 {error.password && (
-                  <span className="error-message">required</span>
+                  <span className="error-message">
+                    required
+                  </span>
                 )}
               </FormControl>
               {error.login && (

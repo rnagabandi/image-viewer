@@ -42,17 +42,19 @@ const Header = () => {
       <span className="app-logo">Image Viewer</span>
       {isLoggedIn && (
         <div className="right-container">
-          <TextField
-            id="outlined-basic"
-            className="search-damage-id"
-            placeholder="Search"
-            variant="outlined"
-            value={searchKey}
-            onChange={event => setSearchKey(event.target.value)}
-            InputProps={{
-              startAdornment: <SearchIcon />
-            }}
-          />
+          {window.location.pathname === "/home" && (
+            <TextField
+              id="outlined-basic"
+              className="search-damage-id"
+              placeholder="Search"
+              variant="outlined"
+              value={searchKey}
+              onChange={event => setSearchKey(event.target.value)}
+              InputProps={{
+                startAdornment: <SearchIcon />
+              }}
+            />
+          )}
           <div className="avatar-menu">
             <Avatar src={PROFILE_ICON} onClick={handleClick} />
             <Menu
@@ -62,14 +64,16 @@ const Header = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  history.push("/profile");
-                }}
-              >
-                My Account
-              </MenuItem>
+              {window.location.pathname === "/home" && (
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    history.push("/profile");
+                  }}
+                >
+                  My Account
+                </MenuItem>
+              )}
               <hr />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </Menu>

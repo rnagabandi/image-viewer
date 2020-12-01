@@ -1,0 +1,33 @@
+.img-container {
+  padding-right: 20px;
+}
+.profile-username {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid grey;
+}
+.profile-username .MuiAvatar-root {
+  padding-right: 10px;
+}
+.img-container img {
+  height: 390px;
+}
+
+.other-details-container {
+  width: 100%;
+}
+.like-comments-container {
+  bottom: 20px;
+  width: 394px;
+  position: absolute;
+}
+.like-comments-container .likes-container{
+    padding: 0px;
+}
+.post-comments{
+    margin-top: 20px;
+    overflow-y: scroll;
+    max-height: 218px;
+}

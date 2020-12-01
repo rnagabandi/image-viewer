@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./home.css";
-import { formatDate } from "../../common/utilities";
+import { formatDate, mockResponse } from "../../common/utilities";
 import { getAllMyMedia } from "../../common/api";
 import PROFILE_ICON from "../../assets/profile_icon.png";
 import {
@@ -33,26 +33,6 @@ const Home = () => {
       });
   }, []);
 
-  const mockResponse = response => {
-    return response.map(item => {
-      if (!item.hashtags) {
-        item.hashtags = ["upskill", "greatpeople", "transformation"];
-      }
-      if (!item.caption) {
-        item.caption = "No caption added";
-      }
-
-      if (!item.comments) {
-        item.comments = [];
-      }
-      if (!item.likes) {
-        item.likes = Math.floor(Math.random() * 10);
-      }
-
-      return item;
-    });
-  };
-
   useEffect(() => {
     if (searchKey) {
       let results = imagesResponse.filter(image =>
@@ -81,9 +61,7 @@ const Home = () => {
   };
 
   const commentHandler = postId => {
-    debugger;
-    imagesResponse.forEach(item => {
-      debugger;
+    imagesResponse.forEach(item => {      
       if (item.id === postId) {
         item.comments.push({
           username: item.username,
@@ -110,7 +88,7 @@ const Home = () => {
             />
             <CardContent>
               <div>
-                <img src={item.media_url} />
+                <img src={item.media_url}  alt={item.id}/>
               </div>
               <div>
                 <span>{item.caption || "   "}</span>

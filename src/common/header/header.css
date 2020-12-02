@@ -24,6 +24,6 @@
 .MuiPopover-paper {
   top: 58px !important;
 }
-.avatar-menu{
-  padding-left: 20px;
+.profile-pic{
+  width: 60px;
 }

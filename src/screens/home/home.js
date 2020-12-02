@@ -14,14 +14,13 @@ import {
   InputLabel
 } from "@material-ui/core";
 import AppContext from "../../common/app-context";
-import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-
+import { Favorite, FavoriteBorder } from "@material-ui/icons";
 const Home = () => {
   const { searchKey } = useContext(AppContext);
   const [imagesResponse, setImagesResponse] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [comments, setComments] = useState({});
+  const [userIcon] = useState(PROFILE_ICON);
 
   useEffect(() => {
     getAllMyMedia()
@@ -43,7 +42,7 @@ const Home = () => {
     } else {
       setFilteredData(imagesResponse);
     }
-  }, [imagesResponse]);
+  }, [searchKey, imagesResponse]);
 
   const likeHandler = postId => {
     imagesResponse.forEach(item => {
@@ -61,7 +60,7 @@ const Home = () => {
   };
 
   const commentHandler = postId => {
-    imagesResponse.forEach(item => {      
+    imagesResponse.forEach(item => {
       if (item.id === postId) {
         item.comments.push({
           username: item.username,
@@ -82,16 +81,17 @@ const Home = () => {
         return (
           <Card key={item.id}>
             <CardHeader
-              avatar={<Avatar src={PROFILE_ICON} />}
+              avatar={<Avatar src={userIcon} />}
               title={item.username}
               subheader={formatDate(item.timestamp)}
             />
             <CardContent>
               <div>
-                <img src={item.media_url}  alt={item.id}/>
+                <img src={item.media_url} alt={item.id} />
               </div>
+              <hr />
               <div>
-                <span>{item.caption || "   "}</span>
+                <strong>{item.caption || "   "}</strong>
               </div>
               <div>
                 {item.hashtags &&
@@ -108,9 +108,9 @@ const Home = () => {
                 onClick={() => likeHandler(item.id)}
               >
                 {item.likedByme ? (
-                  <FavoriteIcon style={{ color: "red" }} />
+                  <Favorite style={{ color: "red" }} />
                 ) : (
-                  <FavoriteBorderOutlinedIcon />
+                  <FavoriteBorder />
                 )}
                 {item.likes && <span>{item.likes} likes</span>}
               </div>

@@ -60,7 +60,7 @@ const Login = () => {
         <Card>
           <CardContent>
             <div className="login-form">
-              <label>LOGIN</label>
+              <h2>LOGIN</h2>
               <FormControl>
                 <InputLabel htmlFor="my-input">Username *</InputLabel>
                 <Input
